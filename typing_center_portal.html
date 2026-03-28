@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tasbeeq Typing Center — UAE Document Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f0f4f8;--white:#ffffff;--dark:#0f1923;--mid:#3d4f63;--muted:#7a8fa6;
+  --border:#dde5ef;--border2:#c8d5e3;
+  --blue:#1558d6;--blue2:#1e6ef5;--blue-bg:#e8f0fe;--blue-light:#f0f6ff;
+  --green:#0f9d58;--green-bg:#e6f4ea;
+  --amber:#f59e0b;--amber-bg:#fef3c7;
+  --red:#dc2626;--red-bg:#fee2e2;
+  --teal:#0891b2;--teal-bg:#e0f2fe;
+  --card:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh;}
+
+/* ── NAV ── */
+nav{background:var(--dark);padding:0 5%;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{width:34px;height:34px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.nav-logo-text{font-size:1rem;font-weight:700;color:#fff;}
+.nav-logo-text span{color:#7eb3ff;font-weight:400;font-size:0.78rem;display:block;margin-top:-2px;}
+.nav-tabs{display:flex;gap:2px;}
+.nav-tab{padding:8px 16px;border:none;background:transparent;color:rgba(255,255,255,0.55);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.2s;}
+.nav-tab.active{background:rgba(255,255,255,0.12);color:#fff;}
+.nav-tab:hover:not(.active){color:rgba(255,255,255,0.8);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.track-btn{background:var(--blue);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:opacity 0.2s;}
+.track-btn:hover{opacity:0.88;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0f1923 0%,#162436 60%,#1a3050 100%);padding:60px 5% 50px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-inner{max-width:640px;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(30,110,245,0.18);border:1px solid rgba(30,110,245,0.3);color:#7eb3ff;padding:5px 14px;border-radius:20px;font-size:0.75rem;font-weight:600;margin-bottom:20px;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:#7eb3ff;}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;letter-spacing:-0.02em;}
+.hero h1 em{color:#7eb3ff;font-style:normal;}
+.hero-sub{color:rgba(255,255,255,0.6);font-size:0.95rem;font-weight:300;line-height:1.75;margin-bottom:32px;max-width:500px;}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.hs{padding:14px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;text-align:center;}
+.hs-n{font-size:1.4rem;font-weight:800;color:#fff;}
+.hs-l{font-size:0.7rem;color:rgba(255,255,255,0.5);margin-top:2px;letter-spacing:0.04em;}
+
+/* ── SECTION ── */
+.section{padding:48px 5%;}
+.sec-tag{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.sec-title{font-size:1.5rem;font-weight:800;margin-bottom:6px;letter-spacing:-0.01em;}
+.sec-sub{color:var(--muted);font-size:0.88rem;font-weight:400;margin-bottom:32px;line-height:1.7;}
+
+/* ── SERVICE CARDS ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.svc-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:22px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+.svc-card::before{content:'';position:absolute;inset:0;background:var(--blue-light);opacity:0;transition:opacity 0.25s;}
+.svc-card:hover,.svc-card.selected{border-color:var(--blue2);transform:translateY(-2px);}
+.svc-card:hover::before,.svc-card.selected::before{opacity:1;}
+.svc-card.selected{border-color:var(--blue);}
+.svc-check{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;background:var(--blue);display:none;align-items:center;justify-content:center;color:#fff;font-size:0.7rem;font-weight:700;}
+.svc-card.selected .svc-check{display:flex;}
+.svc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;position:relative;z-index:1;}
+.svc-name{font-size:0.92rem;font-weight:700;margin-bottom:5px;position:relative;z-index:1;}
+.svc-desc{font-size:0.78rem;color:var(--muted);line-height:1.55;margin-bottom:12px;position:relative;z-index:1;}
+.svc-meta{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.svc-price{font-size:0.85rem;font-weight:700;color:var(--blue);}
+.svc-time{font-size:0.72rem;color:var(--muted);background:var(--bg);padding:3px 8px;border-radius:20px;}
+.svc-badge{position:absolute;top:14px;left:14px;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:10px;z-index:1;}
+.badge-popular{background:var(--blue-bg);color:var(--blue);}
+.badge-express{background:#fff3cd;color:#856404;}
+.badge-new{background:var(--green-bg);color:var(--green);}
+
+/* ── ORDER FLOW ── */
+.order-flow{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.of-steps{display:flex;border-bottom:1px solid var(--border);}
+.of-step{flex:1;padding:16px;text-align:center;font-size:0.78rem;font-weight:600;color:var(--muted);border-right:1px solid var(--border);cursor:pointer;transition:all 0.2s;position:relative;}
+.of-step:last-child{border:none;}
+.of-step.active{color:var(--blue);background:var(--blue-light);}
+.of-step.done{color:var(--green);background:var(--green-bg);}
+.of-step-num{width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;margin:0 auto 6px;}
+.of-step.active .of-step-num{background:var(--blue);color:#fff;}
+.of-step.done .of-step-num{background:var(--green);color:#fff;}
+.of-body{padding:28px;}
+.of-panel{display:none;}
+.of-panel.active{display:block;}
+
+/* ── FORM ── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.form-full{grid-column:1/-1;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg label{font-size:0.75rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted);}
+.fg input,.fg select,.fg textarea{border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;color:var(--dark);background:var(--bg);outline:none;transition:border-color 0.2s;width:100%;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);background:#fff;}
+.fg textarea{resize:none;height:80px;}
+.upload-zone{border:2px dashed var(--border2);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--bg);}
+.upload-zone:hover{border-color:var(--blue);background:var(--blue-light);}
+.upload-zone.has-file{border-color:var(--green);background:var(--green-bg);}
+.upload-icon{font-size:2rem;margin-bottom:10px;}
+.upload-title{font-size:0.88rem;font-weight:600;margin-bottom:4px;}
+.upload-sub{font-size:0.78rem;color:var(--muted);}
+.uploaded-files{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.uf-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;}
+.uf-icon{font-size:1rem;}
+.uf-name{font-size:0.82rem;font-weight:500;flex:1;}
+.uf-size{font-size:0.72rem;color:var(--muted);}
+.uf-del{width:22px;height:22px;border-radius:50%;background:var(--red-bg);color:var(--red);border:none;cursor:pointer;font-size:0.75rem;display:flex;align-items:center;justify-content:center;}
+
+/* ── SELECTED SERVICES SUMMARY ── */
+.sel-services{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.ss-item{display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);border:1px solid var(--border);border-radius:10px;padding:10px 14px;}
+.ss-name{font-size:0.85rem;font-weight:600;}
+.ss-price{font-size:0.85rem;font-weight:700;color:var(--blue);}
+.ss-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem;padding:2px 6px;}
+.ss-remove:hover{color:var(--red);}
+.total-row{display:flex;justify-content:space-between;border-top:2px solid var(--border);padding-top:14px;margin-top:6px;}
+.total-label{font-weight:700;font-size:0.95rem;}
+.total-val{font-size:1.2rem;font-weight:800;color:var(--blue);}
+
+/* ── PAYMENT ── */
+.pay-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.pay-m{border:1.5px solid var(--border);border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.pay-m:hover{border-color:var(--blue2);}
+.pay-m.selected{border-color:var(--blue);background:var(--blue-light);}
+.pay-m-icon{font-size:1.5rem;margin-bottom:6px;}
+.pay-m-name{font-size:0.8rem;font-weight:600;}
+.pay-m-sub{font-size:0.7rem;color:var(--muted);}
+
+/* ── BTN ── */
+.btn-primary{background:var(--blue);color:#fff;border:none;padding:13px 28px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--blue2);transform:translateY(-1px);}
+.btn-secondary{background:transparent;color:var(--mid);border:1px solid var(--border);padding:12px 24px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;cursor:pointer;transition:all 0.2s;}
+.btn-secondary:hover{background:var(--bg);}
+.btn-row{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;}
+.btn-whatsapp{background:#25d366;color:#fff;border:none;padding:12px 22px;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:opacity 0.2s;}
+.btn-whatsapp:hover{opacity:0.88;}
+
+/* ── CONFIRMATION ── */
+.confirm-box{background:#fff;border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center;max-width:540px;margin:0 auto;}
+.confirm-icon{width:68px;height:68px;background:var(--green-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 18px;}
+.order-ref{background:var(--bg);border-radius:10px;padding:11px 20px;font-family:monospace;font-size:1.1rem;letter-spacing:0.1em;color:var(--blue);margin:14px auto;display:inline-block;font-weight:700;border:1px solid var(--border);}
+.confirm-details{background:var(--blue-light);border-radius:12px;padding:16px;margin:18px 0;text-align:left;}
+.cd-row{display:flex;gap:8px;font-size:0.83rem;padding:4px 0;align-items:flex-start;}
+.cd-label{font-weight:600;color:var(--mid);min-width:90px;flex-shrink:0;}
+.cd-val{color:var(--dark);}
+.status-timeline{display:flex;flex-direction:column;gap:0;margin:20px 0;}
+.stl-item{display:flex;gap:12px;align-items:flex-start;}
+.stl-left{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;}
+.stl-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0;}
+.stl-line{width:1.5px;flex:1;min-height:20px;margin:3px 0;}
+.stl-item:last-child .stl-line{display:none;}
+.stl-content{padding-bottom:16px;}
+.stl-title{font-size:0.85rem;font-weight:600;margin-bottom:2px;}
+.stl-sub{font-size:0.78rem;color:var(--muted);}
+
+/* ── TRACK PANEL ── */
+.track-panel{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;}
+.track-input-row{display:flex;gap:10px;margin-bottom:20px;}
+.track-input-row input{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:11px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+.track-input-row input:focus{border-color:var(--blue);}
+
+/* ── ADMIN ── */
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.as{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;}
+.as-n{font-size:1.7rem;font-weight:800;margin-bottom:3px;}
+.as-l{font-size:0.75rem;color:var(--muted);}
+.as.blue .as-n{color:var(--blue);}
+.as.green .as-n{color:var(--green);}
+.as.amber .as-n{color:var(--amber);}
+.as.teal .as-n{color:var(--teal);}
+.orders-table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--border);}
+.orders-table th{background:var(--bg);padding:11px 14px;font-size:0.75rem;font-weight:700;color:var(--muted);text-align:left;border-bottom:1px solid var(--border);letter-spacing:0.04em;text-transform:uppercase;}
+.orders-table td{padding:13px 14px;font-size:0.83rem;border-bottom:1px solid var(--bg);vertical-align:middle;}
+.orders-table tr:last-child td{border:none;}
+.orders-table tr:hover td{background:#fafbff;}
+.status-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;}
+.sp-pending{background:var(--amber-bg);color:#92400e;}
+.sp-processing{background:var(--blue-bg);color:var(--blue);}
+.sp-ready{background:var(--green-bg);color:var(--green);}
+.sp-delivered{background:#f0f0f0;color:var(--muted);}
+.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.act-btn{padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:transparent;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:600;cursor:pointer;transition:all 0.15s;color:var(--mid);}
+.act-btn:hover{background:var(--bg);}
+.act-btn.advance{color:var(--blue);border-color:#bcd2f7;}
+.act-btn.advance:hover{background:var(--blue-bg);}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:11px 18px;border-radius:11px;font-size:0.83rem;z-index:999;transform:translateY(60px);opacity:0;transition:all 0.3s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ── VIEWS ── */
+.view{display:none;}
+.view.active{display:block;}
+
+@media(max-width:768px){
+  nav { padding: 12px 15px; flex-wrap: wrap; height: auto; gap: 12px; }
+  .nav-logo { flex: 1 1 auto; }
+  .nav-tabs { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; justify-content: flex-start; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab { white-space: nowrap; flex-shrink: 0; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.1); }
+  .track-btn { padding: 8px 14px; font-size: 0.75rem; }
+  
+  .hero { padding: 40px 15px 40px; }
+  .hero h1 { font-size: 2rem; }
+  .hero-stats { gap: 10px; }
+  .hs { flex: 1 1 40%; padding: 12px 10px; }
+  
+  .section { padding: 32px 15px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .btn-row { flex-direction: column-reverse; gap: 10px; }
+  .btn-row button { width: 100%; justify-content: center; }
+  
+  .of-body { padding: 20px 15px; }
+  .of-step-label { display: none; }
+  .of-step { padding: 12px 8px; font-size: 0.7rem; }
+  .of-step-num { width: 22px; height: 22px; font-size: 0.7rem; margin-bottom: 4px; }
+  
+  .pay-methods { grid-template-columns: 1fr; }
+  .pay-m { display: flex; align-items: center; justify-content: flex-start; gap: 14px; text-align: left; padding: 14px 16px; }
+  .pay-m-icon { margin-bottom: 0; font-size: 1.5rem; }
+  .pay-m-sub { margin-top: 2px; }
+  
+  .confirm-box { padding: 24px 15px; }
+  .order-ref { font-size: 1rem; padding: 10px 16px; width: 100%; box-sizing: border-box; }
+  .cd-row { flex-direction: column; gap: 2px; margin-bottom: 8px; }
+  
+  .admin-stats { grid-template-columns: 1fr 1fr; }
+  .as { padding: 14px; }
+  .as-n { font-size: 1.4rem; }
+  
+  .table-responsive { overflow-x: auto; margin: 0 -15px; padding: 0 15px; -webkit-overflow-scrolling: touch; }
+  #svc-search, #svc-category { width: 100%; min-width: 100%; flex: 1 1 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">📋</div>
+    <div class="nav-logo-text">Tasbeeq Typing<span>Document Services · UAE</span></div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showMainView('home',this)">Services</button>
+    <button class="nav-tab" onclick="showMainView('track',this)">Track Order</button>
+    <button class="nav-tab" onclick="showMainView('admin',this)">Admin</button>
+  </div>
+  <div class="nav-right">
+    <button class="track-btn" onclick="showMainView('track',document.querySelector('.nav-tab:nth-child(2)'))">📦 Track Order</button>
+  </div>
+</nav>
+
+<!-- ═══════ HOME VIEW ═══════ -->
+<div class="view active" id="view-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag"><span class="hero-tag-dot"></span>100% Online · No Queue · Fast Delivery</div>
+      <h1>UAE Document Services<br><em>From Your Phone</em></h1>
+      <p class="hero-sub">Visa applications, Emirates ID, trade licenses, attestation & more — submit online, pay securely, track in real time. No need to visit our office.</p>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-n">50+</div><div class="hs-l">Services</div></div>
+        <div class="hs"><div class="hs-n">24hr</div><div class="hs-l">Avg turnaround</div></div>
+        <div class="hs"><div class="hs-n">15K+</div><div class="hs-l">Orders done</div></div>
+        <div class="hs"><div class="hs-n">4.9★</div><div class="hs-l">Rating</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section">
+    <div class="sec-tag">Our services</div>
+    <div class="sec-title">What do you need done?</div>
+    <div class="sec-sub">Select one or more services — you can bundle them in a single order</div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+      <div style="flex:1;position:relative;min-width:200px;">
+        <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.9rem;">🔍</span>
+        <input type="text" id="svc-search" placeholder="Search services..." oninput="renderServices()" style="width:100%;border:1px solid var(--border);border-radius:10px;padding:10px 14px 10px 36px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;outline:none;background:var(--white);">
+      </div>
+      <select id="svc-category" onchange="renderServices()" style="border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;outline:none;background:var(--white);color:var(--dark);">
+        <option value="all">All Categories</option>
+        <option value="visa">Visa Services</option>
+        <option value="id">Emirates ID</option>
+        <option value="business">Business / Trade</option>
+        <option value="legal">Legal & Attestation</option>
+        <option value="translation">Translation</option>
+        <option value="health">Medical Fitness</option>
+        <option value="family">Family & Birth</option>
+      </select>
+    </div>
+    <div class="services-grid" id="services-grid"></div>
+    <div style="margin-top:20px;display:flex;justify-content:flex-end;">
+      <button class="btn-primary" onclick="proceedToOrder()" id="proceed-btn" disabled style="opacity:0.4;">Continue with Selected Services →</button>
+    </div>
+  </div>
+
+  <!-- ORDER FLOW -->
+  <div class="section" id="order-section" style="display:none;padding-top:0;">
+    <div class="order-flow">
+      <div class="of-steps">
+        <div class="of-step active" id="os1"><div class="of-step-num">1</div><div class="of-step-label">Details</div></div>
+        <div class="of-step" id="os2"><div class="of-step-num">2</div><div class="of-step-label">Documents</div></div>
+        <div class="of-step" id="os3"><div class="of-step-num">3</div><div class="of-step-label">Payment</div></div>
+        <div class="of-step" id="os4"><div class="of-step-num">4</div><div class="of-step-label">Confirm</div></div>
+      </div>
+
+      <!-- PANEL 1: Customer Details -->
+      <div class="of-body">
+        <div class="of-panel active" id="op1">
+          <div class="sec-tag" style="margin-bottom:6px;">Your details</div>
+          <div class="sec-title" style="font-size:1.2rem;margin-bottom:18px;">Tell us about yourself</div>
+          <div class="form-grid">
+            <div class="fg"><label>Full Name *</label><input type="text" id="f-name" placeholder="Mohammed Al Rashid"/></div>
+            <div class="fg"><label>Phone / WhatsApp *</label><input type="tel" id="f-phone" placeholder="+971 50 123 4567"/></div>
+            <div class="fg"><label>Email Address *</label><input type="email" id="f-email" placeholder="you@email.com"/></div>
+            <div class="fg"><label>Emirates ID</label><input type="text" id="f-eid" placeholder="784-XXXX-XXXXXXX-X"/></div>
+            <div class="fg"><label>Nationality</label>
+              <select id="f-nat">
+                <option value="">Select nationality</option>
+                <option>Emirati</option><option>Indian</option><option>Pakistani</option>
+                <option>Filipino</option><option>Egyptian</option><option>British</option>
+                <option>Bangladeshi</option><option>Sri Lankan</option><option>Other</option>
+              </select>
+            </div>
+            <div class="fg"><label>Delivery method</label>
+              <select id="f-delivery">
+                <option value="email">Email (soft copy)</option>
+                <option value="whatsapp">WhatsApp delivery</option>
+                <option value="pickup">Pickup from office</option>
+                <option value="courier">Courier to address (+AED 25)</option>
+              </select>
+            </div>
+            <div class="fg form-full"><label>Special instructions</label><textarea id="f-notes" placeholder="Any special requirements, urgency, notes for our team..."></textarea></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-primary" onclick="validateStep1()">Next: Upload Documents →</button>
+          </div>
+        </div>
+
+        <!-- PANEL 2: Upload Documents -->
+        <div class="of-panel" id="op2">
+          <div class="sec-tag" style="margin-bottom:6px;">Upload documents</div>
+          <div class="sec-title" style="font-size:1.2rem;margin-bottom:6px;">Attach required files</div>
+          <p style="font-size:0.83rem;color:var(--muted);margin-bottom:20px;">Upload scanned copies, photos, or PDFs. Max 10MB per file. Accepted: PDF, JPG, PNG.</p>
+          <div class="upload-zone" id="upload-zone" onclick="triggerUpload()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+            <div class="upload-icon">📁</div>
+            <div class="upload-title">Click to upload or drag & drop</div>
+            <div class="upload-sub">PDF, JPG, PNG · Max 10MB each</div>
+          </div>
+          <input type="file" id="file-input" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none;" onchange="handleFiles(this.files)"/>
+          <div class="uploaded-files" id="uploaded-files"></div>
+          <div style="margin-top:20px;background:var(--amber-bg);border:1px solid #fcd34d;border-radius:10px;padding:12px 16px;">
+            <div style="font-size:0.82rem;font-weight:600;color:#92400e;margin-bottom:4px;">📋 Common required documents</div>
+            <div style="font-size:0.78rem;color:#78350f;line-height:1.6;" id="doc-requirements"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-secondary" onclick="goOrderStep(1)">← Back</button>
+            <button class="btn-primary" onclick="goOrderStep(3)">Next: Payment →</button>
+          </div>
+        </div>
+
+        <!-- PANEL 3: Payment -->
+        <div class="of-panel" id="op3">
+          <div class="sec-tag" style="margin-bottom:6px;">Payment</div>
+          <div class="sec-title" style="font-size:1.2rem;margin-bottom:18px;">Order summary & payment</div>
+          <div class="sel-services" id="order-summary"></div>
+          <div class="sec-tag" style="margin-bottom:12px;">Choose payment method</div>
+          <div class="pay-methods">
+            <div class="pay-m selected" id="pm-card" onclick="selPay('card')"><div class="pay-m-icon">💳</div><div class="pay-m-name">Card</div><div class="pay-m-sub">Visa / Mastercard</div></div>
+            <div class="pay-m" id="pm-cash" onclick="selPay('cash')"><div class="pay-m-icon">💵</div><div class="pay-m-name">Cash</div><div class="pay-m-sub">Pay at pickup</div></div>
+            <div class="pay-m" id="pm-tabby" onclick="selPay('tabby')"><div class="pay-m-icon">🔄</div><div class="pay-m-name">TABBY</div><div class="pay-m-sub">Pay in 4</div></div>
+          </div>
+          <div id="card-form" style="margin-top:14px;">
+            <div class="form-grid">
+              <div class="fg form-full"><label>Card number</label><input type="text" placeholder="1234  5678  9012  3456" maxlength="19"/></div>
+              <div class="fg"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"/></div>
+              <div class="fg"><label>CVV</label><input type="text" placeholder="123" maxlength="3"/></div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-secondary" onclick="goOrderStep(2)">← Back</button>
+            <button class="btn-primary" onclick="submitOrder()">✓ Place Order & Pay</button>
+          </div>
+        </div>
+
+        <!-- PANEL 4: Confirmation -->
+        <div class="of-panel" id="op4">
+          <div class="confirm-box">
+            <div class="confirm-icon">✅</div>
+            <div style="font-size:1.3rem;font-weight:800;margin-bottom:6px;">Order Placed Successfully!</div>
+            <div style="font-size:0.85rem;color:var(--muted);">Your reference number:</div>
+            <div class="order-ref" id="order-ref-display">TC-000000</div>
+            <div class="confirm-details" id="confirm-details-box"></div>
+            <p style="font-size:0.8rem;color:var(--muted);margin-bottom:16px;">Our team will review your documents and begin processing. You'll receive a WhatsApp update within 1 hour.</p>
+            <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <button class="btn-whatsapp" onclick="showToast('WhatsApp confirmation sent!')">📱 Get WhatsApp Update</button>
+              <button class="btn-secondary" onclick="showMainView('track',null);trackOrderById(document.getElementById('order-ref-display').textContent)">📦 Track Order</button>
+            </div>
+            <div style="margin-top:16px;">
+              <button class="btn-secondary" onclick="resetOrder()" style="font-size:0.82rem;">+ New Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end view-home -->
+
+<!-- ═══════ TRACK VIEW ═══════ -->
+<div class="view" id="view-track">
+  <div class="section">
+    <div class="sec-tag">Order tracking</div>
+    <div class="sec-title">Track your order</div>
+    <div class="sec-sub">Enter your order reference number to see the latest status</div>
+    <div class="track-panel">
+      <div class="track-input-row">
+        <input type="text" id="track-input" placeholder="Enter order reference e.g. TC-284751" onkeydown="if(event.key==='Enter')trackOrder()"/>
+        <button class="btn-primary" onclick="trackOrder()">🔍 Track</button>
+      </div>
+      <div id="track-result" style="display:none;"></div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;">
+      <div style="font-size:0.82rem;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">Recent orders (demo)</div>
+      <div id="recent-orders-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ ADMIN VIEW ═══════ -->
+<div class="view" id="view-admin">
+  <div class="section">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <div><div class="sec-title">Admin Dashboard</div><div style="font-size:0.85rem;color:var(--muted);">Al Aman Typing Center</div></div>
+      <div style="font-size:0.8rem;color:var(--muted);background:#fff;padding:8px 16px;border-radius:10px;border:1px solid var(--border);" id="admin-date"></div>
+    </div>
+    <div class="admin-stats">
+      <div class="as blue"><div class="as-n" id="st-total">0</div><div class="as-l">Total orders</div></div>
+      <div class="as amber"><div class="as-n" id="st-pending">0</div><div class="as-l">Pending review</div></div>
+      <div class="as teal"><div class="as-n" id="st-processing">0</div><div class="as-l">Processing</div></div>
+      <div class="as green"><div class="as-n" id="st-revenue">0</div><div class="as-l">Revenue (AED)</div></div>
+    </div>
+    <div class="table-responsive">
+      <table class="orders-table" id="admin-table">
+        <thead><tr>
+          <th>Ref #</th><th>Customer</th><th>Services</th><th>Amount</th><th>Status</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="admin-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──
+const SERVICES = [
+  {id:'visa_new',name:'New Visa Application',desc:'Tourist, visit, employment or student visa applications via GDRFA/ICP.',price:150,time:'2–3 days',icon:'🛂',category:'visa',badge:'popular',docs:'Passport copy, photo, sponsor letter, bank statement'},
+  {id:'visa_renew',name:'Visa Renewal',desc:'Renew existing UAE residence or visit visa. Includes status check.',price:120,time:'1–2 days',icon:'🔄',category:'visa',badge:'popular',docs:'Passport copy, current visa copy, Emirates ID copy'},
+  {id:'eid_new',name:'Emirates ID — New',desc:'New Emirates ID application for residents and citizens.',price:100,time:'3–5 days',icon:'🪪',category:'id',badge:'',docs:'Passport, visa copy, passport photo, ICA form'},
+  {id:'eid_renew',name:'Emirates ID Renewal',desc:'Renew your Emirates ID before or after expiry.',price:80,time:'2–3 days',icon:'🔁',category:'id',badge:'popular',docs:'Old Emirates ID, passport copy, current visa copy'},
+  {id:'trade_license',name:'Trade License Application',desc:'New trade license or renewal for mainland UAE companies.',price:500,time:'5–7 days',icon:'🏢',category:'business',badge:'',docs:'Passport, visa, tenancy contract, NOC letter, business plan'},
+  {id:'attestation',name:'Document Attestation',desc:'MOFA, Embassy, and chamber attestation for official documents.',price:200,time:'3–5 days',icon:'📜',category:'legal',badge:'',docs:'Original documents, passport copy, application form'},
+  {id:'medical',name:'Medical Fitness Certificate',desc:'DHA/DOH medical fitness typing and appointment booking.',price:75,time:'Same day',icon:'🏥',category:'health',badge:'express',docs:'Passport copy, visa copy, Emirates ID, photo'},
+  {id:'noc',name:'NOC / Experience Letter',desc:'No Objection Certificate typing and attestation services.',price:60,time:'Same day',icon:'✉️',category:'legal',badge:'express',docs:'Passport copy, employment details, request letter'},
+  {id:'contract',name:'Contract Typing',desc:'Employment contracts, tenancy agreements, MOU, and more.',price:80,time:'Same day',icon:'📋',category:'legal',badge:'express',docs:'Party details, terms agreed, draft or notes'},
+  {id:'translation',name:'Legal Translation',desc:'Arabic ↔ English certified translation for official documents.',price:120,time:'1–2 days',icon:'🌐',category:'translation',badge:'new',docs:'Original document copies to be translated'},
+  {id:'police_clearance',name:'Police Clearance Certificate',desc:'UAE and home country police clearance certificate assistance.',price:180,time:'3–7 days',icon:'👮',category:'legal',badge:'',docs:'Passport, visa copy, Emirates ID, purpose letter'},
+  {id:'family_book',name:'Family Book / Birth Certificate',desc:'UAE family book registration, birth certificate applications.',price:200,time:'5–7 days',icon:'👨‍👩‍👧',category:'family',badge:'',docs:'Marriage certificate, parents passports, hospital documents'},
+];
+
+let selectedServices = [];
+let uploadedFiles = [];
+let payMethod = 'card';
+let currentOrderStep = 1;
+let orders = [
+  {ref:'TC-284751',name:'Khalid Al Shamsi',services:'Emirates ID Renewal',amount:80,status:'ready',phone:'+971 50 111 2222'},
+  {ref:'TC-284752',name:'Deepa Thomas',services:'New Visa Application',amount:150,status:'processing',phone:'+971 55 333 4444'},
+  {ref:'TC-284753',name:'Sana Mirza',services:'Document Attestation',amount:200,status:'pending',phone:'+971 52 555 6666'},
+  {ref:'TC-284754',name:'Raj Kumar',services:'Trade License Renewal',amount:500,status:'processing',phone:'+971 50 777 8888'},
+  {ref:'TC-284755',name:'Ahmed Al Zaabi',services:'Medical Fitness Certificate',amount:75,status:'delivered',phone:'+971 56 999 0000'},
+];
+
+// ── RENDER SERVICES ──
+function renderServices(){
+  const g = document.getElementById('services-grid');
+  const search=document.getElementById('svc-search')?.value.toLowerCase() || '';
+  const cat=document.getElementById('svc-category')?.value || 'all';
+  
+  const filtered = SERVICES.filter(s => {
+    const matchSearch = s.name.toLowerCase().includes(search) || s.desc.toLowerCase().includes(search);
+    const matchCat = cat === 'all' || s.category === cat;
+    return matchSearch && matchCat;
+  });
+
+  if(filtered.length === 0){
+    g.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);background:var(--white);border-radius:12px;border:1px dashed var(--border);">No services found matching your criteria.</div>`;
+    return;
+  }
+
+  g.innerHTML = filtered.map(s => `
+    <div class="svc-card ${selectedServices.includes(s.id)?'selected':''}" id="sc-${s.id}" onclick="toggleService('${s.id}')">
+      ${s.badge?`<span class="svc-badge badge-${s.badge}">${s.badge==='popular'?'Popular':s.badge==='express'?'⚡ Express':'New'}</span>`:''}
+      <div class="svc-check">✓</div>
+      <div class="svc-icon" style="background:${iconBg(s.category)}">${s.icon}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-desc">${s.desc}</div>
+      <div class="svc-meta">
+        <span class="svc-price">AED ${s.price}</span>
+        <span class="svc-time">⏱ ${s.time}</span>
+      </div>
+    </div>`).join('');
+}
+
+function iconBg(cat){
+  const m={visa:'#e8f0fe',id:'#e0f2fe',business:'#fef3c7',legal:'#f3e8ff',health:'#d1fae5',translation:'#fce7f3',family:'#fff3e0'};
+  return m[cat]||'#f0f4f8';
+}
+
+function toggleService(id){
+  const idx = selectedServices.indexOf(id);
+  if(idx>-1) selectedServices.splice(idx,1);
+  else selectedServices.push(id);
+  document.querySelectorAll('.svc-card').forEach(c=>c.classList.remove('selected'));
+  selectedServices.forEach(id=>{const el=document.getElementById('sc-'+id);if(el)el.classList.add('selected');});
+  const btn = document.getElementById('proceed-btn');
+  btn.disabled = selectedServices.length===0;
+  btn.style.opacity = selectedServices.length>0?'1':'0.4';
+}
+
+function proceedToOrder(){
+  if(!selectedServices.length) return;
+  document.getElementById('order-section').style.display='block';
+  document.getElementById('order-section').scrollIntoView({behavior:'smooth',block:'start'});
+  goOrderStep(1);
+}
+
+// ── ORDER STEPS ──
+function goOrderStep(n){
+  currentOrderStep=n;
+  for(let i=1;i<=4;i++){
+    document.getElementById('op'+i).classList.toggle('active',i===n);
+    const step=document.getElementById('os'+i);
+    step.classList.remove('active','done');
+    if(i<n) step.classList.add('done');
+    else if(i===n) step.classList.add('active');
+  }
+  if(n===3) buildOrderSummary();
+  if(n===4) buildConfirmation();
+  document.querySelector('.order-flow').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function buildOrderSummary(){
+  const container = document.getElementById('order-summary');
+  let total = 0;
+  const delivery = document.getElementById('f-delivery')?.value==='courier'?25:0;
+  let html = selectedServices.map(id=>{
+    const s=SERVICES.find(x=>x.id===id);
+    total+=s.price;
+    return `<div class="ss-item"><span class="ss-name">${s.icon} ${s.name}</span><span class="ss-price">AED ${s.price}</span></div>`;
+  }).join('');
+  if(delivery>0) html+=`<div class="ss-item"><span class="ss-name">🚚 Courier delivery</span><span class="ss-price">AED ${delivery}</span></div>`;
+  total+=delivery;
+  html+=`<div class="total-row"><span class="total-label">Total payable</span><span class="total-val">AED ${total}</span></div>`;
+  container.innerHTML=html;
+}
+
+function buildConfirmation(){
+  const ref='TC-'+Math.floor(200000+Math.random()*799999);
+  document.getElementById('order-ref-display').textContent=ref;
+  const svcs=selectedServices.map(id=>SERVICES.find(x=>x.id===id).name).join(', ');
+  const total=selectedServices.reduce((s,id)=>s+SERVICES.find(x=>x.id===id).price,0);
+  document.getElementById('confirm-details-box').innerHTML=`
+    <div class="cd-row"><span class="cd-label">Services:</span><span class="cd-val">${svcs}</span></div>
+    <div class="cd-row"><span class="cd-label">Customer:</span><span class="cd-val">${document.getElementById('f-name')?.value||'Customer'}</span></div>
+    <div class="cd-row"><span class="cd-label">Phone:</span><span class="cd-val">${document.getElementById('f-phone')?.value||'—'}</span></div>
+    <div class="cd-row"><span class="cd-label">Payment:</span><span class="cd-val">${payMethod==='card'?'Card (paid)':payMethod==='cash'?'Cash (pay at pickup)':'TABBY (4 installments)'}</span></div>
+    <div class="cd-row"><span class="cd-label">Total:</span><span class="cd-val" style="font-weight:700;color:var(--blue)">AED ${total}</span></div>
+    <div class="cd-row"><span class="cd-label">Status:</span><span class="cd-val"><span class="status-pill sp-pending"><span class="status-dot"></span>Pending review</span></span></div>`;
+  // Add to orders
+  orders.unshift({ref,name:document.getElementById('f-name')?.value||'Customer',services:svcs,amount:total,status:'pending',phone:document.getElementById('f-phone')?.value||'—'});
+  renderAdminTable();
+}
+
+// ── UPLOAD ──
+function triggerUpload(){document.getElementById('file-input').click();}
+function handleFiles(files){[...files].forEach(addFile);}
+function handleDrop(e){e.preventDefault();handleFiles(e.dataTransfer.files);}
+function addFile(file){
+  if(uploadedFiles.length>=10){showToast('Max 10 files allowed');return;}
+  if(file.size > 10 * 1024 * 1024){showToast(`File ${file.name} exceeds 10MB limit`);return;}
+  uploadedFiles.push(file);
+  renderFiles();
+  document.getElementById('upload-zone').classList.add('has-file');
+}
+function renderFiles(){
+  const c=document.getElementById('uploaded-files');
+  c.innerHTML=uploadedFiles.map((f,i)=>`
+    <div class="uf-item">
+      <span class="uf-icon">${f.name.endsWith('.pdf')?'📄':'🖼️'}</span>
+      <span class="uf-name">${f.name}</span>
+      <span class="uf-size">${(f.size/1024).toFixed(0)} KB</span>
+      <button class="uf-del" onclick="removeFile(${i})">✕</button>
+    </div>`).join('');
+}
+function removeFile(i){uploadedFiles.splice(i,1);renderFiles();if(!uploadedFiles.length)document.getElementById('upload-zone').classList.remove('has-file');}
+
+// ── PAYMENT ──
+function selPay(m){
+  payMethod=m;
+  ['card','cash','tabby'].forEach(x=>{
+    document.getElementById('pm-'+x)?.classList.toggle('selected',x===m);
+  });
+  document.getElementById('card-form').style.display=m==='card'?'block':'none';
+}
+
+function validateStep1() {
+  const name=document.getElementById('f-name')?.value?.trim() || '';
+  const phone=document.getElementById('f-phone')?.value?.trim() || '';
+  const email=document.getElementById('f-email')?.value?.trim() || '';
+  const eid=document.getElementById('f-eid')?.value?.trim() || '';
+  
+  if(!name||!phone||!email){showToast('Please fill in Name, Phone, and Email');return;}
+  if(!/^\+?[0-9\s\-]{9,15}$/.test(phone)) { showToast('Please enter a valid phone number'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Please enter a valid email address'); return; }
+  if(eid && !/^784-[0-9]{4}-[0-9]{7}-[0-9]{1}$/.test(eid)) { showToast('Wait! Emirates ID format is 784-XXXX-XXXXXXX-X'); return; }
+
+  goOrderStep(2);
+}
+
+function submitOrder(){
+  goOrderStep(4);
+}
+
+function resetOrder(){
+  selectedServices=[];uploadedFiles=[];currentOrderStep=1;
+  document.querySelectorAll('.svc-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('proceed-btn').disabled=true;
+  document.getElementById('proceed-btn').style.opacity='0.4';
+  document.getElementById('order-section').style.display='none';
+  document.getElementById('uploaded-files').innerHTML='';
+  document.getElementById('upload-zone').classList.remove('has-file');
+  goOrderStep(1);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── DOC REQUIREMENTS ──
+function updateDocRequirements(){
+  const req=selectedServices.map(id=>SERVICES.find(x=>x.id===id)).map(s=>`<b>${s.name}:</b> ${s.docs}`).join('<br>');
+  document.getElementById('doc-requirements').innerHTML=req||'Select services to see required documents.';
+}
+
+// ── TRACKING ──
+function trackOrder(){
+  const ref=document.getElementById('track-input').value.trim().toUpperCase();
+  if(!ref){showToast('Please enter an order reference');return;}
+  trackOrderById(ref);
+}
+
+function trackOrderById(ref){
+  document.getElementById('track-input').value=ref;
+  const o=orders.find(x=>x.ref===ref);
+  const result=document.getElementById('track-result');
+  if(!o){result.style.display='block';result.innerHTML=`<div style="background:var(--red-bg);border:1px solid #fca5a5;border-radius:12px;padding:16px;font-size:0.85rem;color:var(--red);">❌ Order <b>${ref}</b> not found. Please check the reference number.</div>`;return;}
+  const steps=[
+    {label:'Order received',sub:'Documents under review',done:true,active:o.status==='pending'},
+    {label:'Processing',sub:'Team is working on your documents',done:['processing','ready','delivered'].includes(o.status),active:o.status==='processing'},
+    {label:'Ready for delivery',sub:'Documents prepared and ready',done:['ready','delivered'].includes(o.status),active:o.status==='ready'},
+    {label:'Delivered',sub:'Documents sent / picked up',done:o.status==='delivered',active:false},
+  ];
+  const pillClass={pending:'sp-pending',processing:'sp-processing',ready:'sp-ready',delivered:'sp-delivered'}[o.status];
+  const pillLabel={pending:'Pending Review',processing:'Processing',ready:'Ready',delivered:'Delivered'}[o.status];
+  result.style.display='block';
+  result.innerHTML=`
+    <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+        <div><div style="font-family:monospace;font-size:1rem;font-weight:700;color:var(--blue);margin-bottom:4px;">${o.ref}</div><div style="font-size:0.85rem;font-weight:600;">${o.name}</div><div style="font-size:0.78rem;color:var(--muted);">${o.services}</div></div>
+        <div style="text-align:right;"><span class="status-pill ${pillClass}"><span class="status-dot"></span>${pillLabel}</span><div style="font-size:0.8rem;font-weight:700;color:var(--blue);margin-top:6px;">AED ${o.amount}</div></div>
+      </div>
+      <div class="status-timeline">
+        ${steps.map(s=>`
+          <div class="stl-item">
+            <div class="stl-left">
+              <div class="stl-dot" style="background:${s.done?'var(--green)':s.active?'var(--blue)':'var(--border2)'}"></div>
+              <div class="stl-line" style="background:${s.done?'var(--green)':'var(--border)'}"></div>
+            </div>
+            <div class="stl-content">
+              <div class="stl-title" style="color:${s.done||s.active?'var(--dark)':'var(--muted)'}">${s.label}</div>
+              <div class="stl-sub">${s.sub}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">
+        <button class="btn-whatsapp" style="font-size:0.78rem;padding:8px 16px;" onclick="showToast('WhatsApp update sent to ${o.phone}')">📱 Get Update on WhatsApp</button>
+      </div>
+    </div>`;
+}
+
+function renderRecentOrders(){
+  const l=document.getElementById('recent-orders-list');
+  if(!l) return;
+  l.innerHTML=orders.slice(0,5).map(o=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--bg);cursor:pointer;" onclick="trackOrderById('${o.ref}')">
+      <div><div style="font-size:0.83rem;font-weight:600;color:var(--blue);">${o.ref}</div><div style="font-size:0.78rem;color:var(--muted);">${o.name} · ${o.services.split(',')[0]}</div></div>
+      <span class="status-pill ${{pending:'sp-pending',processing:'sp-processing',ready:'sp-ready',delivered:'sp-delivered'}[o.status]}"><span class="status-dot"></span>${o.status.charAt(0).toUpperCase()+o.status.slice(1)}</span>
+    </div>`).join('');
+}
+
+// ── ADMIN ──
+function renderAdminTable(){
+  const pending=orders.filter(o=>o.status==='pending').length;
+  const processing=orders.filter(o=>o.status==='processing').length;
+  const rev=orders.filter(o=>['processing','ready','delivered'].includes(o.status)).reduce((s,o)=>s+o.amount,0);
+  document.getElementById('st-total').textContent=orders.length;
+  document.getElementById('st-pending').textContent=pending;
+  document.getElementById('st-processing').textContent=processing;
+  document.getElementById('st-revenue').textContent=rev.toLocaleString();
+  const tbody=document.getElementById('admin-tbody');
+  const statusFlow={pending:'processing',processing:'ready',ready:'delivered',delivered:'delivered'};
+  const pillClass={pending:'sp-pending',processing:'sp-processing',ready:'sp-ready',delivered:'sp-delivered'};
+  const pillLabel={pending:'Pending',processing:'Processing',ready:'Ready',delivered:'Delivered'};
+  tbody.innerHTML=orders.map((o,i)=>`
+    <tr>
+      <td style="font-family:monospace;font-size:0.78rem;color:var(--blue);font-weight:700;">${o.ref}</td>
+      <td><div style="font-weight:600;font-size:0.83rem;">${o.name}</div><div style="font-size:0.72rem;color:var(--muted);">${o.phone}</div></td>
+      <td style="font-size:0.8rem;max-width:180px;">${o.services}</td>
+      <td style="font-weight:600;">AED ${o.amount}</td>
+      <td><span class="status-pill ${pillClass[o.status]}"><span class="status-dot"></span>${pillLabel[o.status]}</span></td>
+      <td style="display:flex;gap:6px;flex-wrap:wrap;">
+        ${o.status!=='delivered'?`<button class="act-btn advance" onclick="advanceStatus(${i})">Advance →</button>`:''}
+        <button class="act-btn" onclick="showToast('WhatsApp sent to ${o.name}')">📱 Notify</button>
+      </td>
+    </tr>`).join('');
+  renderRecentOrders();
+}
+
+function advanceStatus(i){
+  const flow={pending:'processing',processing:'ready',ready:'delivered'};
+  if(orders[i].status in flow) orders[i].status=flow[orders[i].status];
+  renderAdminTable();
+  showToast('Status updated for '+orders[i].ref);
+}
+
+// ── VIEWS ──
+function showMainView(name,el){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  if(name==='admin'){renderAdminTable();document.getElementById('admin-date').textContent=new Date().toLocaleDateString('en-AE',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+  if(name==='track'){renderRecentOrders();}
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── INIT ──
+renderServices();
+renderAdminTable();
+// Update doc requirements when services change
+const origToggle=toggleService;
+window.toggleService=function(id){origToggle(id);updateDocRequirements();};
+</script>
+</body>
+</html>
